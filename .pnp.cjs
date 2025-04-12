@@ -35,6 +35,7 @@ const RAW_RUNTIME_STATE =
           ["@vitejs/plugin-react", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:4.3.4"],\
           ["cdri-assignment", "workspace:."],\
           ["eslint", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:9.24.0"],\
+          ["eslint-import-resolver-pnp", "npm:0.0.0"],\
           ["eslint-plugin-import", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:2.31.0"],\
           ["eslint-plugin-jsx-a11y", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:6.10.2"],\
           ["eslint-plugin-react", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:7.37.5"],\
@@ -42,6 +43,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-refresh", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:0.4.19"],\
           ["eslint-plugin-unused-imports", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:4.1.4"],\
           ["globals", "npm:16.0.0"],\
+          ["prettier", "npm:3.5.3"],\
           ["react", "npm:19.1.0"],\
           ["react-dom", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:19.1.0"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
@@ -1787,6 +1789,7 @@ const RAW_RUNTIME_STATE =
           ["@vitejs/plugin-react", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:4.3.4"],\
           ["cdri-assignment", "workspace:."],\
           ["eslint", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:9.24.0"],\
+          ["eslint-import-resolver-pnp", "npm:0.0.0"],\
           ["eslint-plugin-import", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:2.31.0"],\
           ["eslint-plugin-jsx-a11y", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:6.10.2"],\
           ["eslint-plugin-react", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:7.37.5"],\
@@ -1794,6 +1797,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-refresh", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:0.4.19"],\
           ["eslint-plugin-unused-imports", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:4.1.4"],\
           ["globals", "npm:16.0.0"],\
+          ["prettier", "npm:3.5.3"],\
           ["react", "npm:19.1.0"],\
           ["react-dom", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:19.1.0"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
@@ -2352,6 +2356,15 @@ const RAW_RUNTIME_STATE =
           ["eslint-import-resolver-node", "npm:0.3.9"],\
           ["is-core-module", "npm:2.16.1"],\
           ["resolve", "patch:resolve@npm%3A1.22.10#optional!builtin<compat/resolve>::version=1.22.10&hash=c3c19d"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["eslint-import-resolver-pnp", [\
+      ["npm:0.0.0", {\
+        "packageLocation": "./.yarn/cache/eslint-import-resolver-pnp-npm-0.0.0-482afcbd66-429150fb08.zip/node_modules/eslint-import-resolver-pnp/",\
+        "packageDependencies": [\
+          ["eslint-import-resolver-pnp", "npm:0.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4167,6 +4180,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/prelude-ls-npm-1.2.1-3e4d272a55-b00d617431.zip/node_modules/prelude-ls/",\
         "packageDependencies": [\
           ["prelude-ls", "npm:1.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["prettier", [\
+      ["npm:3.5.3", {\
+        "packageLocation": "./.yarn/unplugged/prettier-npm-3.5.3-787132ce04/node_modules/prettier/",\
+        "packageDependencies": [\
+          ["prettier", "npm:3.5.3"]\
         ],\
         "linkType": "HARD"\
       }]\

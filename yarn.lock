@@ -1369,6 +1369,7 @@ __metadata:
     "@types/react-dom": "npm:^19"
     "@vitejs/plugin-react": "npm:^4.3.4"
     eslint: "npm:^9.24.0"
+    eslint-import-resolver-pnp: "npm:^0.0.0"
     eslint-plugin-import: "npm:^2.31.0"
     eslint-plugin-jsx-a11y: "npm:^6.10.2"
     eslint-plugin-react: "npm:^7.37.5"
@@ -1376,6 +1377,7 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.4.19"
     eslint-plugin-unused-imports: "npm:^4.1.4"
     globals: "npm:^16.0.0"
+    prettier: "npm:3.5.3"
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
     typescript: "npm:^5.8.3"
@@ -1856,6 +1858,13 @@ __metadata:
     is-core-module: "npm:^2.13.0"
     resolve: "npm:^1.22.4"
   checksum: 10c0/0ea8a24a72328a51fd95aa8f660dcca74c1429806737cf10261ab90cfcaaf62fd1eff664b76a44270868e0a932711a81b250053942595bcd00a93b1c1575dd61
+  languageName: node
+  linkType: hard
+
+"eslint-import-resolver-pnp@npm:^0.0.0":
+  version: 0.0.0
+  resolution: "eslint-import-resolver-pnp@npm:0.0.0"
+  checksum: 10c0/429150fb086b75e8274b2e0f8b6c91580cd1eafd8ee6e2474d57395a0d1a1586510d51e5b88ae4fe3eb355fc9ed70e772b9b4c0435de2fd1ac3fd3e5ca240f67
   languageName: node
   linkType: hard
 
@@ -3441,6 +3450,15 @@ __metadata:
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
   checksum: 10c0/b00d617431e7886c520a6f498a2e14c75ec58f6d93ba48c3b639cf241b54232d90daa05d83a9e9b9fef6baa63cb7e1e4602c2372fea5bc169668401eb127d0cd
+  languageName: node
+  linkType: hard
+
+"prettier@npm:3.5.3":
+  version: 3.5.3
+  resolution: "prettier@npm:3.5.3"
+  bin:
+    prettier: bin/prettier.cjs
+  checksum: 10c0/3880cb90b9dc0635819ab52ff571518c35bd7f15a6e80a2054c05dbc8a3aa6e74f135519e91197de63705bcb38388ded7e7230e2178432a1468005406238b877
   languageName: node
   linkType: hard
 
