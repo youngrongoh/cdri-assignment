@@ -55,6 +55,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-unused-imports", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:4.1.4"],\
           ["globals", "npm:16.0.0"],\
           ["jiti", "npm:2.4.2"],\
+          ["ky", "npm:1.8.1"],\
           ["lucide-react", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:0.488.0"],\
           ["prettier", "npm:3.5.3"],\
           ["react", "npm:19.1.0"],\
@@ -2910,6 +2911,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-unused-imports", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:4.1.4"],\
           ["globals", "npm:16.0.0"],\
           ["jiti", "npm:2.4.2"],\
+          ["ky", "npm:1.8.1"],\
           ["lucide-react", "virtual:33837e0a149695ba87aacebe82eb72eeec32dd3b133370e8e42c1efab4cf867bf4276a020fb4ca50ea65622fe0f44278950dc2dc89412c517f031973b4c4bdf7#npm:0.488.0"],\
           ["prettier", "npm:3.5.3"],\
           ["react", "npm:19.1.0"],\
@@ -4958,6 +4960,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["json-buffer", "npm:3.0.1"],\
           ["keyv", "npm:4.5.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["ky", [\
+      ["npm:1.8.1", {\
+        "packageLocation": "./.yarn/cache/ky-npm-1.8.1-b1028c4433-48ab4b348d.zip/node_modules/ky/",\
+        "packageDependencies": [\
+          ["ky", "npm:1.8.1"]\
         ],\
         "linkType": "HARD"\
       }]\
