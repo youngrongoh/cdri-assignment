@@ -42,6 +42,7 @@
 }
 
 :root {
+  /* Shadcn */
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -117,4 +118,35 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@theme {
+  /* Design System - Typo */
+  --typo-size-title1: 24px;
+  --typo-size-title2: 22px;
+  --typo-size-title3: 18px;
+  --typo-size-body1: 20px;
+  --typo-size-body2: 14px;
+  --typo-size-caption: 16px;
+  --typo-size-small: 10px;
+  --typo-weight-title1: bold;
+  --typo-weight-title2: bold;
+  --typo-weight-title3: bold;
+  --typo-weight-body1: medium;
+  --typo-weight-body2: medium;
+  --typo-weight-caption: medium;
+  --typo-weight-small: medium;
+  --typo-leading-title1: 24px; 
+  --typo-leading-title2: 24px; 
+  --typo-leading-title3: 18px; 
+  --typo-leading-body1: 20px; 
+  --typo-leading-body2: 14px; 
+  --typo-leading-caption: 16px; 
+  --typo-leading-small: 10px;
+}
+
+@utility text-* {
+  font-size: --value(--typo-size-*);
+  line-height: --value(--typo-leading-*);
+  font-weight: --value(--typo-weight-*);
 }
