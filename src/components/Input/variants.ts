@@ -13,10 +13,7 @@ export const inputVaraints = tv({
   variants: {
     variant: {
       default: {
-        root: [
-          'bg-lightgray rounded-[100px] has-[>input:first-child]:px-5',
-          'has-[input:focus-visible]:border-ring has-[input:focus-visible]:ring-ring/50 has-[input:focus-visible]:ring-[1px]',
-        ],
+        root: ['bg-lightgray rounded-3xl has-[>input:first-child]:px-5'],
         prefix: 'size-[30px]',
         input: 'placeholder:text-subtitle text-black',
       },
