@@ -13,12 +13,12 @@ export const tabs = tv({
     variant: {
       default: {
         root: 'h-9 rounded-lg p-[3px]',
-        list: 'bg-muted text-muted-foreground ',
+        list: 'bg-muted text-muted-foreground',
         trigger:
           'h-[calc(100%-1px)] gap-1.5 rounded-md px-2 py-1 text-sm font-medium data-[state=active]:bg-background dark:data-[state=active]:text-foreground transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 data-[state=active]:shadow-sm text-foreground dark:text-muted-foreground',
       },
       underline: {
-        list: 'gap-14',
+        list: 'gap-2 mt-[2px] -mb-[2px]',
         trigger:
           'data-[state=active]:border-b-primary border-b-1px pb-1 typo-body1 text-primary',
       },
