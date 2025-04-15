@@ -11,7 +11,7 @@ import tseslint from 'typescript-eslint';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default tseslint.config(
-  { ignores: ['dist', '.pnp.*', '.yarn/*'] },
+  { ignores: ['dist', '.pnp.*', '.yarn/*', 'src/components/shadcn-origin'] },
   eslintPluginPrettierRecommended,
   js.configs.recommended,
   jsxA11y.flatConfigs.recommended,
