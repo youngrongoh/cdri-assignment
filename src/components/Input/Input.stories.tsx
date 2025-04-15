@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Input } from '.';
+import Input from '.';
 import Search from '@/assets/icons/search.svg';
 
 const meta: Meta<typeof Input> = {

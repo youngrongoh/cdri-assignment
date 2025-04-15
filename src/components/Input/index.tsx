@@ -8,7 +8,13 @@ type Props = {
 } & Omit<ComponentProps<'input'>, 'prefix'> &
   Variants;
 
-function Input({ className, type, prefix, variant, ...props }: Props) {
+export default function Input({
+  className,
+  type,
+  prefix,
+  variant,
+  ...props
+}: Props) {
   return (
     <div className={root({ variant, className })}>
       {prefix && (
@@ -23,5 +29,3 @@ function Input({ className, type, prefix, variant, ...props }: Props) {
     </div>
   );
 }
-
-export { Input };
