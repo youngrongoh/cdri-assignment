@@ -143,6 +143,18 @@
   --typo-leading-body2: 14px; 
   --typo-leading-caption: 16px; 
   --typo-leading-small: 10px;
+
+  /* 텍스트 색상 */
+  --text-color-primary: #353C49;
+  --text-color-subtitle: #8D94A0;
+  --text-color-secondary: #6D7582;
+
+  /* 팔레트 색상 */
+  --color-primary: #4880EE;
+  --color-red: #E84118;
+  --color-gray: #DADADA;
+  --color-white: #FFFFFF;
+  --color-black: #222222;
 }
 
 @utility text-* {
