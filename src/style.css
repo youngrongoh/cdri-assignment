@@ -157,7 +157,7 @@
   --color-black: #222222;
 }
 
-@utility text-* {
+@utility type-* {
   font-size: --value(--typo-size-*);
   line-height: --value(--typo-leading-*);
   font-weight: --value(--typo-weight-*);

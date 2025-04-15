@@ -1,32 +1,33 @@
+import { cn } from '@/lib/utils';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ReactNode } from 'react';
 
 const Text = ({
-  className,
+  variant,
   children,
 }: {
-  className: string;
+  variant: string;
   children: ReactNode;
-}) => <div className={className}>{children}</div>;
+}) => <div className={cn(variant)}>{children}</div>;
 
 const meta: Meta<typeof Text> = {
   title: 'DesignSystem/Typography',
   component: Text,
   tags: ['autodocs'],
   argTypes: {
-    className: {
+    variant: {
       control: {
         type: 'select',
       },
       options: [
-        'text-title1',
-        'text-title2',
-        'text-title3',
-        'text-body1',
-        'text-body2',
-        'text-body2 font-bold',
-        'text-caption',
-        'text-small',
+        'typo-title1',
+        'typo-title2',
+        'typo-title3',
+        'typo-body1',
+        'typo-body2',
+        'typo-body2 font-bold',
+        'typo-caption',
+        'typo-small',
       ],
     },
   },
@@ -37,56 +38,56 @@ type Story = StoryObj<typeof Text>;
 
 export const Title1: Story = {
   args: {
-    className: 'text-title1',
+    variant: 'typo-title1',
     children: 'Title1',
   },
 };
 
 export const title2: Story = {
   args: {
-    className: 'text-title2',
+    variant: 'typo-title2',
     children: 'Title2',
   },
 };
 
 export const title3: Story = {
   args: {
-    className: 'text-title3',
+    variant: 'typo-title3',
     children: 'Title3',
   },
 };
 
 export const body1: Story = {
   args: {
-    className: 'text-body1',
+    variant: 'typo-body1',
     children: 'Body1',
   },
 };
 
 export const body2: Story = {
   args: {
-    className: 'text-body2',
+    variant: 'typo-body2',
     children: 'Body2',
   },
 };
 
 export const body2Bold: Story = {
   args: {
-    className: 'text-body2 font-bold',
+    variant: 'typo-body2 font-bold',
     children: 'Body2 Bold',
   },
 };
 
 export const caption: Story = {
   args: {
-    className: 'text-caption',
+    variant: 'typo-caption',
     children: 'Caption',
   },
 };
 
 export const small: Story = {
   args: {
-    className: 'text-small',
+    variant: 'typo-small',
     children: 'Small',
   },
 };
