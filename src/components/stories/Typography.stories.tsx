@@ -4,11 +4,13 @@ import { ReactNode } from 'react';
 
 const Text = ({
   variant,
+  color,
   children,
 }: {
   variant: string;
+  color: string;
   children: ReactNode;
-}) => <div className={cn(variant)}>{children}</div>;
+}) => <div className={cn(color, variant)}>{children}</div>;
 
 const meta: Meta<typeof Text> = {
   title: 'DesignSystem/Typography',
@@ -29,6 +31,12 @@ const meta: Meta<typeof Text> = {
         'typo-caption',
         'typo-small',
       ],
+    },
+    color: {
+      control: {
+        type: 'select',
+      },
+      options: ['text-primary', 'text-secondary', 'text-subtitle'],
     },
   },
 };
