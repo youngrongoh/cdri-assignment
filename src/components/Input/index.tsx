@@ -17,13 +17,11 @@ export default function Input({
 }: Props) {
   return (
     <div className={root({ variant, className })}>
-      {prefix && (
-        <div className={prefixBox({ variant, className })}>{prefix}</div>
-      )}
+      {prefix && <div className={prefixBox({ variant })}>{prefix}</div>}
       <input
         type={type}
         data-slot="input"
-        className={input({ variant, className })}
+        className={input({ variant })}
         {...props}
       />
     </div>
