@@ -10,7 +10,7 @@ export default function GNB() {
   );
 
   return (
-    <div className="flex space-between xl:pl-40 xl:pr-92 md:px-20 gap-8 typo-title1">
+    <div className="h-20 flex items-center space-between px-4 xl:pl-40 xl:pr-92 md:px-20 gap-8 typo-title1">
       <div className="shrink-0">
         <Link to="/">CERTICOS BOOKS</Link>
       </div>
