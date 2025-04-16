@@ -1,5 +1,6 @@
 import Input from '@/components/Input';
 import {
+  ChangeEvent,
   ChangeEventHandler,
   ComponentProps,
   useCallback,
@@ -15,6 +16,7 @@ import HistoryList from './HistoryList';
 interface Props extends ComponentProps<typeof Input> {
   searchHistory: ComponentProps<typeof HistoryList>['items'];
   historyOpen?: boolean;
+  onChange: (event: ChangeEvent | string) => void;
   onHistoryRemove?: (keyword: string) => void;
 }
 
@@ -55,6 +57,8 @@ export default function SearchInput({
     onChange?.(event);
   };
 
+  const onHistoryClick = (keyword: string) => onChange?.(keyword);
+
   useEffect(() => {
     if (searchHistory.length > 0) return;
     togglePopover(false);
@@ -83,7 +87,11 @@ export default function SearchInput({
           sideOffset={0}
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <HistoryList items={searchHistory} onRemoveClick={onHistoryRemove} />
+          <HistoryList
+            items={searchHistory}
+            onItemClick={onHistoryClick}
+            onRemoveClick={onHistoryRemove}
+          />
         </PopoverContent>
       </Popover>
     </div>
