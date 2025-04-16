@@ -1,5 +1,5 @@
 import Button from '@/components/Button';
-import Close from '@/assets/icons/close.svg';
+import Remove from '@/assets/icons/remove.svg';
 import { SearchHistoryItem } from '@/lib/hooks/useSearchHistory';
 
 interface Props {
@@ -13,7 +13,7 @@ export default function HistoryList({ items }: Props) {
         <li key={keyword} className="flex justify-between">
           <Button className="typo-caption text-subtitle">{keyword}</Button>
           <Button className="size-6" variant="default" size="icon">
-            <Close />
+            <Remove />
           </Button>
         </li>
       ))}
