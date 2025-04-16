@@ -9,8 +9,12 @@ import Input from '../Input';
 import useSearchHistory from '@/lib/hooks/useSearchHistory';
 import { useState } from 'react';
 import { SearchFormInput, searchFormSchema } from './validation';
-
-const HISTORY_COUNT_LIMIT = 8;
+import {
+  FILTER_TARGET_OPTIONS,
+  HISTORY_COUNT_LIMIT,
+  SEARCH_FORM_DEFULAT_VALUE,
+  SEARCH_FORM_ID,
+} from './constants';
 
 interface Props {
   defaultValue?: {
@@ -18,13 +22,10 @@ interface Props {
     target: Exclude<SearchFormInput['filter'], undefined>['target'];
   };
 }
-const DEFULAT_VALUE = {
-  SEARCH: '',
-  FILTER_TARGET: 'title',
-  FILTER_VALUE: '',
-};
-const FORM_ID = 'search-form';
+
 export default function SearchForm({ defaultValue }: Props) {
+  const navigate = useNavigate();
+
   const [filterOpen, setfilterOpen] = useState(false);
   const handlePopoverOpenChange = (open: boolean) => setfilterOpen(open);
 
@@ -32,10 +33,10 @@ export default function SearchForm({ defaultValue }: Props) {
     resolver: zodResolver(searchFormSchema),
     mode: 'onSubmit',
     defaultValues: {
-      search: defaultValue?.search || DEFULAT_VALUE.SEARCH,
+      search: defaultValue?.search || SEARCH_FORM_DEFULAT_VALUE.SEARCH,
       filter: {
-        target: defaultValue?.target || DEFULAT_VALUE.FILTER_TARGET,
-        value: DEFULAT_VALUE.FILTER_VALUE,
+        target: defaultValue?.target || SEARCH_FORM_DEFULAT_VALUE.FILTER_TARGET,
+        value: SEARCH_FORM_DEFULAT_VALUE.FILTER_VALUE,
       },
     },
   });
@@ -46,10 +47,10 @@ export default function SearchForm({ defaultValue }: Props) {
         ? {
             target:
               (filter?.target || defaultValue?.target) ??
-              DEFULAT_VALUE.FILTER_TARGET,
-            q: filter?.value ?? DEFULAT_VALUE.FILTER_VALUE,
+              SEARCH_FORM_DEFULAT_VALUE.FILTER_TARGET,
+            q: filter?.value ?? SEARCH_FORM_DEFULAT_VALUE.FILTER_VALUE,
           }
-        : { q: search ?? DEFULAT_VALUE.SEARCH }
+        : { q: search ?? SEARCH_FORM_DEFULAT_VALUE.SEARCH }
     ) as Record<string, string>;
 
     const searchParams = new URLSearchParams(params);
@@ -58,22 +59,21 @@ export default function SearchForm({ defaultValue }: Props) {
     setfilterOpen(false);
 
     if (filterOpen) {
-      form.setValue('search', DEFULAT_VALUE.SEARCH);
+      form.setValue('search', SEARCH_FORM_DEFULAT_VALUE.SEARCH);
     } else {
       form.setValue('filter', {
-        value: DEFULAT_VALUE.FILTER_VALUE,
-        target: DEFULAT_VALUE.FILTER_TARGET,
+        value: SEARCH_FORM_DEFULAT_VALUE.FILTER_VALUE,
+        target: SEARCH_FORM_DEFULAT_VALUE.FILTER_TARGET,
       });
     }
   };
 
-  const navigate = useNavigate();
   const { searchHistory, addHistory, removeHistory } =
     useSearchHistory(HISTORY_COUNT_LIMIT);
 
   return (
     <Form
-      id={FORM_ID}
+      id={SEARCH_FORM_ID}
       className="w-full flex items-center gap-4"
       {...form}
       onSubmit={form.handleSubmit(onSubmit)}
@@ -92,7 +92,7 @@ export default function SearchForm({ defaultValue }: Props) {
         )}
       />
       <SearchDetailPopover
-        form={FORM_ID}
+        form={SEARCH_FORM_ID}
         triggerText="상세검색"
         submitText="검색하기"
         open={filterOpen}
@@ -105,15 +105,11 @@ export default function SearchForm({ defaultValue }: Props) {
             render={({ field }) => (
               <Select
                 {...field}
-                form={FORM_ID}
+                form={SEARCH_FORM_ID}
                 className="basis-[100px] shrink-0"
                 variant="underline"
                 onValueChange={field.onChange}
-                items={[
-                  { label: '제목', value: 'title' },
-                  { label: '저자명', value: 'person' },
-                  { label: '출판사', value: 'publisher' },
-                ]}
+                items={FILTER_TARGET_OPTIONS}
               />
             )}
           />
@@ -122,7 +118,7 @@ export default function SearchForm({ defaultValue }: Props) {
             render={({ field }) => (
               <Input
                 {...field}
-                form={FORM_ID}
+                form={SEARCH_FORM_ID}
                 className="w-full text-[14px] leading-[22px] pt-2"
                 placeholder="검색어 입력"
                 variant="underline"
