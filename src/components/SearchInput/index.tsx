@@ -13,6 +13,7 @@ interface Props extends ComponentProps<typeof Input> {
 export default function SearchInput({
   searchHistory = [],
   historyOpen = false,
+  onChange,
   ...props
 }: Props) {
   const hasHistories = searchHistory.length > 0;
@@ -32,6 +33,7 @@ export default function SearchInput({
     const { value } = event.target;
     const hasValue = value.length > 0;
     togglePopover(hasValue);
+    onChange?.(event);
   };
 
   return (
