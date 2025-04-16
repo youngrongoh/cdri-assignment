@@ -117,17 +117,8 @@
   --button-outline: #8D94A0;
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-@theme {
-  /* Design System - Typo */
+@theme inline {
+  /* 타이포 */
   --typo-size-title1: 24px;
   --typo-size-title2: 22px;
   --typo-size-title3: 18px;
@@ -162,6 +153,24 @@
   --color-lightgray: #F2F4F6;
   --color-white: #FFFFFF;
   --color-black: #222222;
+
+  /* 폰트 */
+  --font-noto: 'Noto Sans KR Variable', Apple SD Gothic Neo
+  , sans-serif;
+}
+
+@layer base {
+  @font-face {
+    font-family: 'Noto Sans KR Variable';
+    font-display: swap;
+    src: url('fonts/NotoSansKR-VariableFont_wght.ttf') format('truetype');
+  }
+  * {
+    @apply border-border outline-ring/50 font-noto;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
 @utility typo-* {
@@ -169,7 +178,6 @@
   line-height: --value(--typo-leading-*);
   font-weight: --value(--typo-weight-*);
 }
-
 
 @layer utilities {
   .bottom-line {
