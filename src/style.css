@@ -39,6 +39,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-button-outline: var(--button-outline);
 }
 
 :root {
@@ -75,6 +77,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  --button-outline: #8D94A0;
 }
 
 .dark {
@@ -109,6 +113,8 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  --button-outline: #8D94A0;
 }
 
 @layer base {
@@ -162,4 +168,11 @@
   font-size: --value(--typo-size-*);
   line-height: --value(--typo-leading-*);
   font-weight: --value(--typo-weight-*);
+}
+
+
+@layer utilities {
+  .bottom-line {
+    @apply relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-[#D2D6DA];
+  }
 }
