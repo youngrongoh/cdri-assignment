@@ -31,12 +31,8 @@ export default function TogglePane({
 }: Props) {
   return (
     <div className="flex bottom-line text-primary pl-[54px] pr-[15px] pb-10 pt-4">
-      <div className="relative">
-        <img
-          className="max-w-[210px] w-full max-h-[280px]"
-          src={thumbnail}
-          alt={title}
-        />
+      <div className="relative max-w-[210px] w-full max-h-[280px]">
+        <img className="w-full h-full" src={thumbnail} alt={title} />
         <LikeButton
           className="absolute top-0 right-0 [&_svg]:size-6!"
           like={like}

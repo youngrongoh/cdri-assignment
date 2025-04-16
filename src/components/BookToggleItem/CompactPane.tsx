@@ -29,9 +29,9 @@ export default function CompactPane({
   const hasThumbnail = thumbnail.trim().length > 0;
   return (
     <div className="flex items-center pl-12 pr-[15px] py-4 bottom-line">
-      <div className="relative">
+      <div className="relative max-w-12 w-full h-17 mr-12">
         <img
-          className="max-w-12 w-full h-17 mr-12"
+          className="w-full h-full"
           src={hasThumbnail ? thumbnail : noCoverImage}
           alt={title}
         />
