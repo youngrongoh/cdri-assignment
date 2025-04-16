@@ -1,7 +1,7 @@
 import Button from '@/components/Button';
 import { Link } from 'react-router';
 import { ReactNode } from 'react';
-import { toCurrency } from '@/lib/utils';
+import { cn, toCurrency } from '@/lib/utils';
 import LikeButton from '../LikeButton';
 
 interface Props {
@@ -29,6 +29,8 @@ export default function TogglePane({
   toggleButton,
   onLikeClick,
 }: Props) {
+  const hasPrice = !!price && price > 0;
+  const hasSalePrice = !!salePrice && salePrice > 0;
   return (
     <div className="flex bottom-line text-primary pl-[54px] pr-[15px] pb-10 pt-4">
       <div className="relative max-w-[210px] w-full max-h-[280px]">
@@ -56,22 +58,34 @@ export default function TogglePane({
           {toggleButton}
           <div className="w-full space-y-7">
             <div className="space-y-2 text-subtitle">
-              <p className="typo-small">
-                원가{' '}
-                <span className="typo-title3 text-primary font-medium line-through ml-2">
-                  {toCurrency(price, 'ko')}
-                </span>
-              </p>
-              <p className="typo-small">
-                할인가{' '}
-                <strong className="typo-title3 text-primary ml-2">
-                  {toCurrency(salePrice, 'ko')}
-                </strong>
-              </p>
+              {hasPrice && (
+                <p className="typo-small">
+                  원가{' '}
+                  <span
+                    className={cn('typo-title3 text-primary font-medium ml-2', {
+                      'line-through': hasSalePrice,
+                    })}
+                  >
+                    {toCurrency(price, 'ko')}
+                  </span>
+                </p>
+              )}
+              {hasSalePrice && (
+                <p className="typo-small">
+                  할인가{' '}
+                  <strong className="typo-title3 text-primary ml-2">
+                    {toCurrency(salePrice, 'ko')}
+                  </strong>
+                </p>
+              )}
             </div>
-            <Button variant="primary" size="block" asChild>
+            <Button
+              variant={hasPrice ? 'primary' : 'secondary'}
+              size="block"
+              asChild
+            >
               <Link to={url} target="_blank">
-                구매하기
+                {hasPrice ? '구매하기' : '재고확인'}
               </Link>
             </Button>
           </div>

@@ -27,6 +27,7 @@ export default function CompactPane({
   onLikeClick,
 }: Props) {
   const hasThumbnail = thumbnail.trim().length > 0;
+  const hasPrice = !!price && price > 0;
   return (
     <div className="flex items-center pl-12 pr-[15px] py-4 bottom-line">
       <div className="relative max-w-12 w-full h-17 mr-12">
@@ -46,12 +47,14 @@ export default function CompactPane({
           <span className="mr-4">{title}</span>
           <div>{authors}</div>
         </div>
-        <div className="whitespace-nowrap">{toCurrency(price, 'ko')}</div>
+        {hasPrice && (
+          <div className="whitespace-nowrap">{toCurrency(price, 'ko')}</div>
+        )}
       </div>
       <div className="flex gap-2">
-        <Button variant="primary" size="lg" asChild>
+        <Button variant={hasPrice ? 'primary' : 'secondary'} size="lg" asChild>
           <Link to={url} target="_blank">
-            구매하기
+            {hasPrice ? '구매하기' : '재고확인'}
           </Link>
         </Button>
         {toggleButton}
