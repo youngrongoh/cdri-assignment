@@ -14,10 +14,13 @@
 nvm use
 corepack use yarn
 
-# 2. 환경변수 설정
+# 2. 패키지 설치
+yarn
+
+# 3. 환경변수 설정
 # 메일로 첨부함
 
-# 3. 개발 서버 실행
+# 4. 개발 서버 실행
 pnpm dev
 
 # + 스토리북 실행시 패키지 설치가 필요할 수 있습니다.
@@ -29,7 +32,7 @@ pnpm dev
     - TypeScript
 	- React Query
 - 선택
-	- Yarn Berry (PnP): 다른 환경에서 별도의 패키지 설치 과정 없이 프로젝트를 실행 가능
+	- Yarn Berry (PnP): 다른 환경에서 별도의 패키지 설치 시간을 줄여줌
 	- Vite: 빠른 환경 셋업 및 HMR
 	- eslint + prettier: 포매팅 및 린팅 도구
 	- Storybook: 피그마에 정의된 디자인 시스템과 컴포넌트 확인
