@@ -2,13 +2,14 @@ import Input from '@/components/Input';
 import {
   ChangeEventHandler,
   ComponentProps,
+  useCallback,
   useEffect,
   useRef,
   useState,
 } from 'react';
 import Search from '@/assets/icons/search.svg';
 import { Popover, PopoverAnchor, PopoverContent } from '@/components/Popover';
-import { useClickAway } from 'react-use';
+import { useClickAway, useKeyPressEvent } from 'react-use';
 import HistoryList from './HistoryList';
 
 interface Props extends ComponentProps<typeof Input> {
@@ -29,14 +30,23 @@ export default function SearchInput({
   const contentRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const togglePopover = (open: boolean) => {
-    if (open && !hasHistories) return;
-    setOpen(open);
-  };
+  const togglePopover = useCallback(
+    (open: boolean) => {
+      if (open && !hasHistories) return;
+      setOpen(open);
+    },
+    [hasHistories],
+  );
 
   useClickAway(contentRef, () => {
     togglePopover(false);
   });
+
+  useKeyPressEvent(
+    'Enter',
+    () => {},
+    () => setOpen(false),
+  );
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const { value } = event.target;
@@ -48,7 +58,7 @@ export default function SearchInput({
   useEffect(() => {
     if (searchHistory.length > 0) return;
     togglePopover(false);
-  }, [searchHistory]);
+  }, [searchHistory, togglePopover]);
 
   return (
     <div className="w-full">
