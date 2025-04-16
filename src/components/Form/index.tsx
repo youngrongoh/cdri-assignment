@@ -13,10 +13,11 @@ import {
 
 import { cn } from '@/lib/utils';
 import { Label } from '@/components/shadcn-origin/label';
-import { createContext, FormEventHandler, useContext, useId } from 'react';
+import { ComponentProps, createContext, useContext, useId } from 'react';
 
 interface HtmlFormProps {
-  onSubmit?: FormEventHandler<HTMLFormElement>;
+  className?: ComponentProps<'form'>['className'];
+  onSubmit?: ComponentProps<'form'>['onSubmit'];
 }
 
 const Form = <
@@ -25,6 +26,7 @@ const Form = <
   TContext = any,
   TTransformedValues = TFieldValues,
 >({
+  className,
   onSubmit,
   children,
   ...props
@@ -32,7 +34,9 @@ const Form = <
   FormProviderProps<TFieldValues, TContext, TTransformedValues>) => {
   return (
     <FormProvider {...props}>
-      <form onSubmit={onSubmit}>{children}</form>
+      <form className={className} onSubmit={onSubmit}>
+        {children}
+      </form>
     </FormProvider>
   );
 };
