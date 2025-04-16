@@ -2,6 +2,7 @@ import Button from '@/components/Button';
 import { Link } from 'react-router';
 import { ReactNode } from 'react';
 import { toCurrency } from '@/lib/utils';
+import noCoverImage from '@/assets/images/no-cover.png';
 
 interface Props {
   thumbnail: string;
@@ -20,9 +21,14 @@ export default function CompactPane({
   url,
   toggleButton,
 }: Props) {
+  const hasThumbnail = thumbnail.trim().length > 0;
   return (
     <div className="flex items-center pl-12 pr-[15px] py-4 bottom-line">
-      <img className="max-w-12 w-full h-17 mr-12" src={thumbnail} alt={title} />
+      <img
+        className="max-w-12 w-full h-17 mr-12"
+        src={hasThumbnail ? thumbnail : noCoverImage}
+        alt={title}
+      />
       <div className="flex basis-full justify-between gap-5 mr-14">
         <div className="flex basis-full mr-1">
           <span className="mr-4">{title}</span>
