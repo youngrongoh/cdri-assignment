@@ -3,6 +3,7 @@ import NoData from '@/components/NoData';
 import SearchCount from '@/components/SearchCount';
 import SearchForm from '@/components/SearchForm';
 import { useBookSearch } from '@/lib/hooks/service/useBookSearch';
+import { BookData } from '@/types/book';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import { useSearchParams } from 'react-router';
 
@@ -18,15 +19,28 @@ export default function SearchPage() {
     isLoading,
     error,
     isFetchingNextPage,
-  } = useBookSearch({ query: { query, target } });
-  const hasItems = data && data?.length > 0;
+  } = useBookSearch({ query, target });
 
+  const items = data?.reduce<BookData['documents']>(
+    (acc, { documents }) => [
+      ...acc,
+      ...documents.map(({ sale_price, ...item }) => ({
+        ...item,
+        salePrice: sale_price,
+      })),
+    ],
+    [],
+  );
+
+  const hasItems = items && items?.length > 0;
+
+  const loading = isLoading || isFetchingNextPage;
   const [infiniteRef] = useInfiniteScroll({
-    loading: isLoading,
+    loading,
     hasNextPage,
     onLoadMore: fetchNextPage,
-    disabled: Boolean(error),
-    rootMargin: '0px 0px 400px 0px',
+    disabled: Boolean(error) || !hasNextPage,
+    rootMargin: '0px 0px 300px 0px',
   });
 
   return (
@@ -41,11 +55,12 @@ export default function SearchPage() {
       <section>
         {hasItems ? (
           <ul>
-            {data?.map((item) => <BookToggleItem {...item} />)}
-            {hasNextPage && (
+            {items?.map((item, i) => <BookToggleItem key={i} {...item} />)}
+            {!loading && hasNextPage && <div ref={infiniteRef}></div>}
+            {loading && (
               <div
                 ref={infiniteRef}
-                className="flex items-center justify-center"
+                className="flex items-center justify-center p-5"
               >
                 <div className="h-6 w-6 animate-spin rounded-full border-2 border-t-transparent border-gray-500" />
               </div>

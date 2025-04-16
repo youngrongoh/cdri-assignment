@@ -21,7 +21,7 @@ export default function SearchDetailPopover({
 }: Props) {
   return (
     <Popover>
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <Button variant="outline" size="sm" type="button">
           {triggerText}
         </Button>

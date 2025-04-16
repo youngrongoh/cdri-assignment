@@ -19,7 +19,7 @@ export interface BookMeta {
   totalCount: number;
 }
 
-export interface BookResponse {
+export interface BookData {
   documents: Book[];
   meta: BookMeta;
 }

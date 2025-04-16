@@ -13,7 +13,7 @@ interface Props {
   price: number;
   salePrice: number;
   url: string;
-  open: boolean;
+  open?: boolean;
 }
 
 export default function BookToggleItem({
