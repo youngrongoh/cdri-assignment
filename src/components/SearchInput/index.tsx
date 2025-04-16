@@ -7,7 +7,7 @@ import HistoryList from './HistoryList';
 
 interface Props extends ComponentProps<typeof Input> {
   searchHistory: ComponentProps<typeof HistoryList>['items'];
-  historyOpen: boolean;
+  historyOpen?: boolean;
 }
 
 export default function SearchInput({
