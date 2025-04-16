@@ -33,8 +33,7 @@ export default function useSearchHistory<T extends SearchHistoryItem>(
       return newHistory;
     }
 
-    const newStartIndex = newHistory.length - storeLimit;
-    return newHistory.slice(newStartIndex);
+    return newHistory.slice(0, storeLimit);
   };
 
   const remove = (keyword: T) => {
