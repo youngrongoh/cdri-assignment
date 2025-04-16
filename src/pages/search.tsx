@@ -49,7 +49,7 @@ export default function SearchPage() {
         <div className="w-[480px] flex flex-col gap-6">
           <h1 className="typo-title2">도서 검색</h1>
           <SearchForm defaultValue={{ search: query, target }} />
-          <SearchCount label="도서 검색 결과" count={20} />
+          <SearchCount label="도서 검색 결과" count={items?.length ?? 0} />
         </div>
       </section>
       <section>
