@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router';
 import Layout from '@/pages/layout';
-import SearchPage from '@/pages/search';
+import SearchPage, { searchPageLoader } from '@/pages/search';
 import CartPage from '@/pages/cart';
 
 const router = createBrowserRouter([
@@ -14,6 +14,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/search',
+        loader: searchPageLoader,
         element: <SearchPage />,
       },
       {

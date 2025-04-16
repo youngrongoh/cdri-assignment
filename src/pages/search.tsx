@@ -2,12 +2,36 @@ import BookToggleItem from '@/components/BookToggleItem';
 import NoData from '@/components/NoData';
 import SearchCount from '@/components/SearchCount';
 import SearchForm from '@/components/SearchForm';
-import { useBookSearch } from '@/lib/hooks/service/useBookSearch';
+import {
+  getBookSearchQuery,
+  useBookSearch,
+} from '@/lib/hooks/service/useBookSearch';
 import useCartStore from '@/lib/hooks/useCartStore';
-import { BookData } from '@/types/book';
+import queryClient from '@/lib/query-client';
 import { useMemo } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
-import { useSearchParams } from 'react-router';
+import { LoaderFunction, useSearchParams } from 'react-router';
+
+export const searchPageLoader: LoaderFunction = async ({ request }) => {
+  const { searchParams } = new URL(request.url);
+  if (searchParams.size === 0) return null;
+
+  const query = searchParams.get('q') ?? '';
+  const target = searchParams.get('target') ?? '';
+  const { queryKey, queryFn } = getBookSearchQuery({
+    query,
+    target,
+    infinite: true,
+  });
+
+  await queryClient.prefetchInfiniteQuery({
+    queryKey,
+    queryFn: () => queryFn({ query, target }, 1),
+    initialPageParam: 1,
+  });
+
+  return null;
+};
 
 export default function SearchPage() {
   const [searchParams] = useSearchParams();
@@ -26,17 +50,13 @@ export default function SearchPage() {
   const { cart, toggle: toggleBookCart } = useCartStore();
   const isbns = useMemo(() => cart.map(({ isbn }) => isbn), [cart]);
 
-  const items = data?.reduce<BookData['documents']>(
-    (acc, { documents }) => [
-      ...acc,
-      ...documents.map(({ sale_price, ...item }) => ({
-        ...item,
-        salePrice: sale_price,
-        like: isbns.includes(item.isbn),
-      })),
-    ],
-    [],
-  );
+  const items = data?.pages
+    .flatMap((page) => page.documents)
+    .map(({ sale_price, ...item }) => ({
+      ...item,
+      salePrice: sale_price,
+      like: isbns.includes(item.isbn),
+    }));
 
   const hasItems = items && items?.length > 0;
 
