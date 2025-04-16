@@ -169,3 +169,10 @@
   line-height: --value(--typo-leading-*);
   font-weight: --value(--typo-weight-*);
 }
+
+
+@layer utilities {
+  .bottom-line {
+    @apply relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-[#D2D6DA];
+  }
+}
