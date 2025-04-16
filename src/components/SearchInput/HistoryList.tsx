@@ -1,7 +1,7 @@
 import Button from '@/components/Button';
 import Close from '@/assets/icons/close.svg';
+import { SearchHistoryItem } from '@/lib/hooks/useSearchHistory';
 
-type SearchHistoryItem = string;
 interface Props {
   items: SearchHistoryItem[];
 }
