@@ -46,7 +46,7 @@ export default function CartPage() {
             {hasNextPage && <div ref={infiniteRef}></div>}
           </ul>
         ) : (
-          <NoData />
+          <NoData text="찜한 책이 없습니다." />
         )}
       </section>
     </main>

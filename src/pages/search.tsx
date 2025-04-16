@@ -79,7 +79,7 @@ export default function SearchPage() {
             )}
           </ul>
         ) : (
-          <NoData />
+          <NoData text="검색된 결과가 없습니다." />
         )}
       </section>
     </main>
