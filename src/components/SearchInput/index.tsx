@@ -35,7 +35,7 @@ export default function SearchInput({
   };
 
   return (
-    <div>
+    <div className="w-full">
       <Popover open={open}>
         <PopoverAnchor>
           <Input
