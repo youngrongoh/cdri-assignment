@@ -1,17 +1,16 @@
-import * as React from 'react';
+import { ComponentProps, ReactNode } from 'react';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
-
+import Close from '@/assets/icons/close.svg';
 import { tv, VariantProps } from 'tailwind-variants';
+import { cn } from '@/lib/utils';
 
-function Popover({
-  ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Root>) {
+function Popover({ ...props }: ComponentProps<typeof PopoverPrimitive.Root>) {
   return <PopoverPrimitive.Root data-slot="popover" {...props} />;
 }
 
 function PopoverTrigger({
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Trigger>) {
+}: ComponentProps<typeof PopoverPrimitive.Trigger>) {
   return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />;
 }
 
@@ -45,8 +44,9 @@ function PopoverContent({
   sideOffset = 4,
   variant,
   transition,
+  children,
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Content> & Variants) {
+}: ComponentProps<typeof PopoverPrimitive.Content> & Variants) {
   return (
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Content
@@ -55,15 +55,39 @@ function PopoverContent({
         sideOffset={sideOffset}
         className={content({ variant, transition, className })}
         {...props}
-      />
+      >
+        {children}
+      </PopoverPrimitive.Content>
     </PopoverPrimitive.Portal>
   );
 }
 
 function PopoverAnchor({
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Anchor>) {
+}: ComponentProps<typeof PopoverPrimitive.Anchor>) {
   return <PopoverPrimitive.Anchor data-slot="popover-anchor" {...props} />;
 }
 
-export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor };
+interface PopoverCloseProps {
+  className?: string;
+  children?: ReactNode;
+}
+
+function PopoverClose({ className, children }: PopoverCloseProps) {
+  return (
+    <PopoverPrimitive.Close
+      className={cn(
+        'absolute top-0 right-0 p-2 [&_svg]:text-[12px]',
+        {
+          '[&_svg]:text-[20px] hover:[&_svg]:brightness-85 hover:[&_svg]:grayscale-0':
+            !children,
+        },
+        className,
+      )}
+    >
+      {children ?? <Close />}
+    </PopoverPrimitive.Close>
+  );
+}
+
+export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor, PopoverClose };
