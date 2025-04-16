@@ -20,7 +20,7 @@ interface Props {
 }
 const DEFULAT_VALUE = {
   SEARCH: '',
-  FILTER_TARGET: 'person',
+  FILTER_TARGET: 'title',
   FILTER_VALUE: '',
 };
 export default function SearchForm({ defaultValue }: Props) {
