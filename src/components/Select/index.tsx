@@ -15,11 +15,11 @@ export {
 } from './Select';
 
 type Props =
-  | (ComponentProps<typeof SlotSelect> & { variant: 'slot' })
-  | (ComponentProps<typeof SimpleSelect> & { variant?: 'default' });
+  | (ComponentProps<typeof SlotSelect> & { slot: true })
+  | (ComponentProps<typeof SimpleSelect> & { slot?: false });
 
 export default function Select(props: Props) {
-  if (props.variant === 'slot') {
+  if (props.slot) {
     return <SlotSelect {...props} />;
   } else {
     return <SimpleSelect {...props} />;

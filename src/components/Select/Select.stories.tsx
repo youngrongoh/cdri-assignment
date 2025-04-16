@@ -11,7 +11,7 @@ const meta: Meta<typeof Select> = {
   component: Select,
   tags: ['autodocs'],
   argTypes: {
-    variant: {
+    slot: {
       control: {
         disable: true,
       },
@@ -29,7 +29,6 @@ const ITEMS = [
 
 export const Default: Story = {
   args: {
-    variant: 'default',
     placeholder: 'placeholder',
     items: ITEMS,
   },
@@ -37,7 +36,7 @@ export const Default: Story = {
 
 export const Slot: Story = {
   args: {
-    variant: 'slot',
+    slot: true,
     children: (
       <>
         <SelectTrigger>
