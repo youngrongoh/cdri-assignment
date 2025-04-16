@@ -16,7 +16,7 @@ interface Props {
   open: boolean;
 }
 
-export default function SearchInput({
+export default function BookToggleItem({
   thumbnail,
   title,
   authors,
@@ -27,7 +27,7 @@ export default function SearchInput({
   open: injectedOpen = false,
 }: Props) {
   const [open, setOpen] = useState(injectedOpen);
-  const stringifiedAuthors = authors.join(', ');
+  const stringifiedAuthors = authors?.join(', ');
   const toggleButton = (
     <Button
       className={cn({ '[&_svg]:rotate-180': open })}

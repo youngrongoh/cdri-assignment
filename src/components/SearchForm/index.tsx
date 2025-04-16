@@ -30,6 +30,7 @@ export default function SearchForm() {
   });
 
   const onSubmit: SubmitHandler<FormInput> = ({ search, filter }) => {
+    console.log('asdfasd');
     const params = (
       !filter ? { q: search } : { target: filter.target, q: filter.value }
     ) as Record<string, string>;

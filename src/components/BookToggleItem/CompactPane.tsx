@@ -1,6 +1,7 @@
 import Button from '@/components/Button';
 import { Link } from 'react-router';
 import { ReactNode } from 'react';
+import { toCurrency } from '@/lib/utils';
 
 interface Props {
   thumbnail: string;
@@ -27,7 +28,7 @@ export default function CompactPane({
           <span className="mr-4">{title}</span>
           <div>{authors}</div>
         </div>
-        <div className="whitespace-nowrap">{price.toLocaleString() + '원'}</div>
+        <div className="whitespace-nowrap">{toCurrency(price, 'ko')}</div>
       </div>
       <div className="flex gap-2">
         <Button variant="primary" size="lg" asChild>
