@@ -13,7 +13,9 @@ interface Props {
   price: number;
   salePrice: number;
   url: string;
+  like?: boolean;
   open?: boolean;
+  onLikeClick?: () => void;
 }
 
 export default function BookToggleItem({
@@ -24,7 +26,9 @@ export default function BookToggleItem({
   price,
   salePrice,
   url,
+  like,
   open: injectedOpen = false,
+  onLikeClick,
 }: Props) {
   const [open, setOpen] = useState(injectedOpen);
   const stringifiedAuthors = authors?.join(', ');
@@ -51,6 +55,8 @@ export default function BookToggleItem({
           salePrice={salePrice}
           url={url}
           toggleButton={toggleButton}
+          like={like}
+          onLikeClick={onLikeClick}
         />
       ) : (
         <CompactPane
@@ -60,6 +66,8 @@ export default function BookToggleItem({
           price={price}
           url={url}
           toggleButton={toggleButton}
+          like={like}
+          onLikeClick={onLikeClick}
         />
       )}
     </div>

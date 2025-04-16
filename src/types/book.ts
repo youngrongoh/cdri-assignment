@@ -10,6 +10,7 @@ export interface Book {
   thumbnail: string;
   title: string;
   translators: string[];
+  like?: boolean;
   url: string;
 }
 

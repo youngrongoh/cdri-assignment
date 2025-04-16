@@ -3,7 +3,9 @@ import NoData from '@/components/NoData';
 import SearchCount from '@/components/SearchCount';
 import SearchForm from '@/components/SearchForm';
 import { useBookSearch } from '@/lib/hooks/service/useBookSearch';
+import useCartStore from '@/lib/hooks/useCartStore';
 import { BookData } from '@/types/book';
+import { useMemo } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import { useSearchParams } from 'react-router';
 
@@ -21,12 +23,16 @@ export default function SearchPage() {
     isFetchingNextPage,
   } = useBookSearch({ query, target });
 
+  const { cart, toggle: toggleBookCart } = useCartStore();
+  const isbns = useMemo(() => cart.map(({ isbn }) => isbn), [cart]);
+
   const items = data?.reduce<BookData['documents']>(
     (acc, { documents }) => [
       ...acc,
       ...documents.map(({ sale_price, ...item }) => ({
         ...item,
         salePrice: sale_price,
+        like: isbns.includes(item.isbn),
       })),
     ],
     [],
@@ -55,7 +61,13 @@ export default function SearchPage() {
       <section>
         {hasItems ? (
           <ul>
-            {items?.map((item, i) => <BookToggleItem key={i} {...item} />)}
+            {items?.map((item) => (
+              <BookToggleItem
+                key={item.isbn}
+                {...item}
+                onLikeClick={() => toggleBookCart(item)}
+              />
+            ))}
             {!loading && hasNextPage && <div ref={infiniteRef}></div>}
             {loading && (
               <div
