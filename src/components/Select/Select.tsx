@@ -49,7 +49,7 @@ const selectVariants = tv({
           'shadow-[0_0_4px_rgba(0,0,0,0.25)]',
         ],
         selectItem: [
-          'h-[30px] px-2 hover:bg-lightgray data-[state="checked"]:hidden',
+          'typo-body2 h-[30px] px-2 hover:bg-lightgray data-[state="checked"]:hidden',
         ],
       },
     },
