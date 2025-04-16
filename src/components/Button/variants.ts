@@ -16,7 +16,8 @@ const buttonVariants = tv({
       default: 'rounded-sm px-1',
       sm: 'h-[35px] typo-body2 rounded-md gap-1.5 px-[10px] py-[5px] [&_svg]:typo-small',
       lg: 'h-12 typo-caption rounded-md px-5 py-[13px] [&_svg]:typo-body2',
-      block: 'h-10 typo-caption rounded-md px-6 [&_svg]:typo-body2',
+      block:
+        'w-full h-12 typo-caption rounded-md px-5 py-[13px] [&_svg]:typo-body2',
       icon: "[&_svg:not([class*='size-'])]:size-full",
     },
   },
