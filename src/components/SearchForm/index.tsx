@@ -25,6 +25,7 @@ const DEFULAT_VALUE = {
 };
 export default function SearchForm({ defaultValue }: Props) {
   const filterOpenRef = useRef(false);
+
   const form = useForm<SearchFormInput>({
     resolver: zodResolver(searchFormSchema),
     mode: 'onSubmit',
@@ -67,6 +68,9 @@ export default function SearchForm({ defaultValue }: Props) {
   const { searchHistory, addHistory, removeHistory } =
     useSearchHistory(HISTORY_COUNT_LIMIT);
 
+  const handlePopoverOpenChange = (open: boolean) =>
+    (filterOpenRef.current = open);
+
   return (
     <Form
       id="search-form"
@@ -91,7 +95,7 @@ export default function SearchForm({ defaultValue }: Props) {
         form="search-form"
         triggerText="상세검색"
         submitText="검색하기"
-        onOpenChange={(open) => (filterOpenRef.current = open)}
+        onOpenChange={handlePopoverOpenChange}
       >
         <fieldset className="w-full flex items-center gap-1">
           <FormField
