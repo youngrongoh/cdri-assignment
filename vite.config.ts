@@ -17,6 +17,7 @@ export default defineConfig(({ mode }) => {
     define: {
       'process.env': env,
     },
+    publicDir: '../public',
     root: 'src',
     resolve: {
       alias: {
