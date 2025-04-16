@@ -2,6 +2,7 @@ import Button from '@/components/Button';
 import { Link } from 'react-router';
 import { ReactNode } from 'react';
 import { toCurrency } from '@/lib/utils';
+import LikeButton from '../LikeButton';
 
 interface Props {
   thumbnail: string;
@@ -11,7 +12,9 @@ interface Props {
   price: number;
   salePrice: number;
   url: string;
+  like?: boolean;
   toggleButton: ReactNode;
+  onLikeClick?: () => void;
 }
 
 export default function TogglePane({
@@ -22,15 +25,24 @@ export default function TogglePane({
   price,
   salePrice,
   url,
+  like,
   toggleButton,
+  onLikeClick,
 }: Props) {
   return (
     <div className="flex bottom-line text-primary pl-[54px] pr-[15px] pb-10 pt-4">
-      <img
-        className="max-w-[210px] w-full max-h-[280px]"
-        src={thumbnail}
-        alt={title}
-      />
+      <div className="relative">
+        <img
+          className="max-w-[210px] w-full max-h-[280px]"
+          src={thumbnail}
+          alt={title}
+        />
+        <LikeButton
+          className="absolute top-0 right-0 [&_svg]:size-6!"
+          like={like}
+          onClick={onLikeClick}
+        />
+      </div>
       <div className="flex justify-between flex-1">
         <div className="p-6">
           <div className="flex gap-4">

@@ -13,10 +13,12 @@ interface Props {
   price: number;
   salePrice: number;
   url: string;
-  open: boolean;
+  like?: boolean;
+  open?: boolean;
+  onLikeClick?: () => void;
 }
 
-export default function SearchInput({
+export default function BookToggleItem({
   thumbnail,
   title,
   authors,
@@ -24,10 +26,12 @@ export default function SearchInput({
   price,
   salePrice,
   url,
+  like,
   open: injectedOpen = false,
+  onLikeClick,
 }: Props) {
   const [open, setOpen] = useState(injectedOpen);
-  const stringifiedAuthors = authors.join(', ');
+  const stringifiedAuthors = authors?.join(', ');
   const toggleButton = (
     <Button
       className={cn({ '[&_svg]:rotate-180': open })}
@@ -51,6 +55,8 @@ export default function SearchInput({
           salePrice={salePrice}
           url={url}
           toggleButton={toggleButton}
+          like={like}
+          onLikeClick={onLikeClick}
         />
       ) : (
         <CompactPane
@@ -60,6 +66,8 @@ export default function SearchInput({
           price={price}
           url={url}
           toggleButton={toggleButton}
+          like={like}
+          onLikeClick={onLikeClick}
         />
       )}
     </div>

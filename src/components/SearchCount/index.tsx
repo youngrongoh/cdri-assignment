@@ -3,7 +3,7 @@ interface Props {
   count: number;
 }
 
-export default function SearchInput({ label, count }: Props) {
+export default function SearchCount({ label, count }: Props) {
   return (
     <div className="flex gap-4 typo-caption text-primary">
       {label}

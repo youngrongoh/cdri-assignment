@@ -3,74 +3,113 @@ import SearchInput from '@/components/SearchInput';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import SearchDetailPopover from './SearchDetailPopover';
 import Select from '@/components/Select';
 import Input from '../Input';
 import useSearchHistory from '@/lib/hooks/useSearchHistory';
+import { useState } from 'react';
+import { SearchFormInput, searchFormSchema } from './validation';
+import {
+  FILTER_TARGET_OPTIONS,
+  HISTORY_COUNT_LIMIT,
+  SEARCH_FORM_DEFULAT_VALUE,
+  SEARCH_FORM_ID,
+} from './constants';
 
-const schema = z
-  .object({
-    search: z.string().min(1).optional(),
-    filter: z
-      .object({
-        target: z.string(),
-        value: z.string().min(1),
-      })
-      .optional(),
-  })
-  .refine((data) => !!(data.search || data.filter));
+interface Props {
+  defaultValue?: {
+    search: SearchFormInput['search'];
+    target: Exclude<SearchFormInput['filter'], undefined>['target'];
+  };
+}
 
-type FormInput = z.input<typeof schema>;
+export default function SearchForm({ defaultValue }: Props) {
+  const navigate = useNavigate();
 
-const HISTORY_COUNT_LIMIT = 8;
-export default function SearchForm() {
-  const form = useForm({
-    resolver: zodResolver(schema),
+  const [filterOpen, setfilterOpen] = useState(false);
+  const handlePopoverOpenChange = (open: boolean) => setfilterOpen(open);
+
+  const form = useForm<SearchFormInput>({
+    resolver: zodResolver(searchFormSchema),
+    mode: 'onSubmit',
+    defaultValues: {
+      search: defaultValue?.search || SEARCH_FORM_DEFULAT_VALUE.SEARCH,
+      filter: {
+        target: defaultValue?.target || SEARCH_FORM_DEFULAT_VALUE.FILTER_TARGET,
+        value: SEARCH_FORM_DEFULAT_VALUE.FILTER_VALUE,
+      },
+    },
   });
 
-  const onSubmit: SubmitHandler<FormInput> = ({ search, filter }) => {
+  const onSubmit: SubmitHandler<SearchFormInput> = ({ search, filter }) => {
     const params = (
-      !filter ? { q: search } : { target: filter.target, q: filter.value }
+      filterOpen
+        ? {
+            target:
+              (filter?.target || defaultValue?.target) ??
+              SEARCH_FORM_DEFULAT_VALUE.FILTER_TARGET,
+            q: filter?.value ?? SEARCH_FORM_DEFULAT_VALUE.FILTER_VALUE,
+          }
+        : { q: search ?? SEARCH_FORM_DEFULAT_VALUE.SEARCH }
     ) as Record<string, string>;
+
     const searchParams = new URLSearchParams(params);
     navigate('?' + searchParams.toString());
     addHistory(params.q);
+    setfilterOpen(false);
+
+    if (filterOpen) {
+      form.setValue('search', SEARCH_FORM_DEFULAT_VALUE.SEARCH);
+    } else {
+      form.setValue('filter', {
+        value: SEARCH_FORM_DEFULAT_VALUE.FILTER_VALUE,
+        target: SEARCH_FORM_DEFULAT_VALUE.FILTER_TARGET,
+      });
+    }
   };
 
-  const navigate = useNavigate();
-  const { searchHistory, addHistory } = useSearchHistory(HISTORY_COUNT_LIMIT);
+  const { searchHistory, addHistory, removeHistory } =
+    useSearchHistory(HISTORY_COUNT_LIMIT);
 
   return (
     <Form
-      className="flex items-center gap-4"
+      id={SEARCH_FORM_ID}
+      className="w-full flex items-center gap-4"
       {...form}
       onSubmit={form.handleSubmit(onSubmit)}
     >
       <FormField
+        control={form.control}
         name="search"
         render={({ field }) => (
           <SearchInput
             variant="default"
             placeholder="검색어 입력"
             searchHistory={searchHistory}
+            onHistoryRemove={removeHistory}
             {...field}
           />
         )}
       />
-      <SearchDetailPopover triggerText="상세검색" submitText="검색하기">
+      <SearchDetailPopover
+        form={SEARCH_FORM_ID}
+        triggerText="상세검색"
+        submitText="검색하기"
+        open={filterOpen}
+        onOpenChange={handlePopoverOpenChange}
+      >
         <fieldset className="w-full flex items-center gap-1">
           <FormField
+            control={form.control}
             name="filter.target"
             render={({ field }) => (
               <Select
-                className="w-[100px]"
-                variant="underline"
-                items={[
-                  { label: 'a', value: 'a' },
-                  { label: 'b', value: 'b' },
-                ]}
                 {...field}
+                form={SEARCH_FORM_ID}
+                className="basis-[100px] shrink-0"
+                variant="underline"
+                onValueChange={field.onChange}
+                items={FILTER_TARGET_OPTIONS}
               />
             )}
           />
@@ -78,10 +117,11 @@ export default function SearchForm() {
             name="filter.value"
             render={({ field }) => (
               <Input
+                {...field}
+                form={SEARCH_FORM_ID}
                 className="w-full text-[14px] leading-[22px] pt-2"
                 placeholder="검색어 입력"
                 variant="underline"
-                {...field}
               />
             )}
           />

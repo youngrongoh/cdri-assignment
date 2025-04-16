@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 import {
   Popover,
   PopoverClose,
@@ -12,16 +12,20 @@ interface Props {
   form?: string;
   submitText: string;
   triggerText: string;
+  open?: boolean;
+  onOpenChange?: ComponentProps<typeof Popover>['onOpenChange'];
 }
 export default function SearchDetailPopover({
   triggerText,
   submitText,
   form,
   children,
+  open,
+  onOpenChange,
 }: Props) {
   return (
-    <Popover>
-      <PopoverTrigger>
+    <Popover open={open} onOpenChange={onOpenChange}>
+      <PopoverTrigger asChild>
         <Button variant="outline" size="sm" type="button">
           {triggerText}
         </Button>

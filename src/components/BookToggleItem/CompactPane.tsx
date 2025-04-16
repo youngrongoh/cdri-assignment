@@ -1,6 +1,9 @@
 import Button from '@/components/Button';
 import { Link } from 'react-router';
 import { ReactNode } from 'react';
+import { toCurrency } from '@/lib/utils';
+import noCoverImage from '@/assets/images/no-cover.png';
+import LikeButton from '../LikeButton';
 
 interface Props {
   thumbnail: string;
@@ -8,7 +11,9 @@ interface Props {
   authors: string;
   price: number;
   url: string;
+  like?: boolean;
   toggleButton: ReactNode;
+  onLikeClick?: () => void;
 }
 
 export default function CompactPane({
@@ -17,17 +22,31 @@ export default function CompactPane({
   authors,
   price,
   url,
+  like,
   toggleButton,
+  onLikeClick,
 }: Props) {
+  const hasThumbnail = thumbnail.trim().length > 0;
   return (
     <div className="flex items-center pl-12 pr-[15px] py-4 bottom-line">
-      <img className="max-w-12 w-full h-17 mr-12" src={thumbnail} alt={title} />
+      <div className="relative">
+        <img
+          className="max-w-12 w-full h-17 mr-12"
+          src={hasThumbnail ? thumbnail : noCoverImage}
+          alt={title}
+        />
+        <LikeButton
+          className="absolute top-0 right-0 [&_svg]:size-4!"
+          like={like}
+          onClick={onLikeClick}
+        />
+      </div>
       <div className="flex basis-full justify-between gap-5 mr-14">
         <div className="flex basis-full mr-1">
           <span className="mr-4">{title}</span>
           <div>{authors}</div>
         </div>
-        <div className="whitespace-nowrap">{price.toLocaleString() + '원'}</div>
+        <div className="whitespace-nowrap">{toCurrency(price, 'ko')}</div>
       </div>
       <div className="flex gap-2">
         <Button variant="primary" size="lg" asChild>

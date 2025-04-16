@@ -1,9 +1,26 @@
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter, Navigate } from 'react-router';
+import Layout from '@/pages/layout';
+import SearchPage from '@/pages/search';
+import CartPage from '@/pages/cart';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div className="text-xl bg-blue-300">React App</div>,
+    element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <Navigate to="/search" replace />,
+      },
+      {
+        path: '/search',
+        element: <SearchPage />,
+      },
+      {
+        path: '/cart',
+        element: <CartPage />,
+      },
+    ],
   },
 ]);
 
