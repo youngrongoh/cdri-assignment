@@ -1,31 +1,45 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, InfiniteData } from '@tanstack/react-query';
 import { fetchBooks, BookResponse } from '@/lib/api/kakao';
 
-interface Props {
+export const DEFAULT_PAGE_SIZE = 10;
+export const getBookSearchQuery = (filter: {
+  query: string;
+  target?: string;
+  infinite?: boolean;
+}) => ({
+  queryKey: ['book', filter] as const,
+  queryFn: (...args: Parameters<typeof fetchBooks>) =>
+    fetchBooks(args[0], args[1], args[2] ?? DEFAULT_PAGE_SIZE),
+});
+
+interface UseBookSearchParameters {
   query: string;
   target?: string;
   size?: number;
 }
-const DEFAULT_PAGE_SIZE = 10;
+
 export function useBookSearch({
   query,
   target,
-  size = DEFAULT_PAGE_SIZE,
-}: Props) {
+  size,
+}: UseBookSearchParameters) {
+  const { queryKey, queryFn } = getBookSearchQuery({
+    query,
+    target,
+    infinite: true,
+  });
   return useInfiniteQuery<
     BookResponse,
     Error,
-    BookResponse[],
-    ['book', typeof query],
+    InfiniteData<BookResponse, number>,
+    ReturnType<typeof getBookSearchQuery>['queryKey'],
     number
   >({
-    queryKey: ['book', query],
-    queryFn: ({ pageParam = 1 }) =>
-      fetchBooks({ query, target }, pageParam, size),
+    queryKey,
+    queryFn: ({ pageParam = 1 }) => queryFn({ query, target }, pageParam, size),
     getNextPageParam: (lastPage, allPages) =>
-      lastPage.meta.is_end ? undefined : allPages.length + 1,
+      lastPage?.meta?.is_end ? undefined : allPages?.length + 1,
     enabled: !!query,
     initialPageParam: 1,
-    select: ({ pages }) => pages,
   });
 }
