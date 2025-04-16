@@ -42,30 +42,27 @@ export default function SearchForm({ defaultValue }: Props) {
   });
 
   const onSubmit: SubmitHandler<SearchFormInput> = ({ search, filter }) => {
-    const params = (
-      filterOpen
-        ? {
-            target:
-              (filter?.target || defaultValue?.target) ??
-              SEARCH_FORM_DEFULAT_VALUE.FILTER_TARGET,
-            q: filter?.value ?? SEARCH_FORM_DEFULAT_VALUE.FILTER_VALUE,
-          }
-        : { q: search ?? SEARCH_FORM_DEFULAT_VALUE.SEARCH }
-    ) as Record<string, string>;
-
-    const searchParams = new URLSearchParams(params);
-    navigate('?' + searchParams.toString());
-    addHistory(params.q);
-    setfilterOpen(false);
-
+    let params: Record<string, string>;
     if (filterOpen) {
+      params = {
+        target: filter?.target ?? SEARCH_FORM_DEFULAT_VALUE.FILTER_TARGET,
+        q: filter?.value ?? SEARCH_FORM_DEFULAT_VALUE.FILTER_VALUE,
+      };
+
       form.setValue('search', SEARCH_FORM_DEFULAT_VALUE.SEARCH);
     } else {
+      params = { q: search ?? SEARCH_FORM_DEFULAT_VALUE.SEARCH };
+
       form.setValue('filter', {
         value: SEARCH_FORM_DEFULAT_VALUE.FILTER_VALUE,
         target: SEARCH_FORM_DEFULAT_VALUE.FILTER_TARGET,
       });
     }
+
+    const searchParams = new URLSearchParams(params);
+    navigate('?' + searchParams.toString());
+    addHistory(params.q);
+    setfilterOpen(false);
   };
 
   const { searchHistory, addHistory, removeHistory } =
