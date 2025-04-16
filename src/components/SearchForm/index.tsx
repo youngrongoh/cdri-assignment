@@ -48,9 +48,19 @@ export default function SearchForm({ defaultValue }: Props) {
           }
         : { q: search ?? DEFULAT_VALUE.SEARCH }
     ) as Record<string, string>;
+
     const searchParams = new URLSearchParams(params);
     navigate('?' + searchParams.toString());
     addHistory(params.q);
+
+    if (filterOpenRef.current) {
+      form.setValue('search', DEFULAT_VALUE.SEARCH);
+    } else {
+      form.setValue('filter', {
+        value: DEFULAT_VALUE.FILTER_VALUE,
+        target: DEFULAT_VALUE.FILTER_TARGET,
+      });
+    }
   };
 
   const navigate = useNavigate();
