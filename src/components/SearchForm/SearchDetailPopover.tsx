@@ -12,6 +12,7 @@ interface Props {
   form?: string;
   submitText: string;
   triggerText: string;
+  open?: boolean;
   onOpenChange?: ComponentProps<typeof Popover>['onOpenChange'];
 }
 export default function SearchDetailPopover({
@@ -19,10 +20,11 @@ export default function SearchDetailPopover({
   submitText,
   form,
   children,
+  open,
   onOpenChange,
 }: Props) {
   return (
-    <Popover onOpenChange={onOpenChange}>
+    <Popover open={open} onOpenChange={onOpenChange}>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" type="button">
           {triggerText}

@@ -7,7 +7,7 @@ import SearchDetailPopover from './SearchDetailPopover';
 import Select from '@/components/Select';
 import Input from '../Input';
 import useSearchHistory from '@/lib/hooks/useSearchHistory';
-import { useRef } from 'react';
+import { useState } from 'react';
 import { SearchFormInput, searchFormSchema } from './validation';
 
 const HISTORY_COUNT_LIMIT = 8;
@@ -23,8 +23,10 @@ const DEFULAT_VALUE = {
   FILTER_TARGET: 'title',
   FILTER_VALUE: '',
 };
+const FORM_ID = 'search-form';
 export default function SearchForm({ defaultValue }: Props) {
-  const filterOpenRef = useRef(false);
+  const [filterOpen, setfilterOpen] = useState(false);
+  const handlePopoverOpenChange = (open: boolean) => setfilterOpen(open);
 
   const form = useForm<SearchFormInput>({
     resolver: zodResolver(searchFormSchema),
@@ -40,7 +42,7 @@ export default function SearchForm({ defaultValue }: Props) {
 
   const onSubmit: SubmitHandler<SearchFormInput> = ({ search, filter }) => {
     const params = (
-      filterOpenRef.current
+      filterOpen
         ? {
             target:
               (filter?.target || defaultValue?.target) ??
@@ -53,8 +55,9 @@ export default function SearchForm({ defaultValue }: Props) {
     const searchParams = new URLSearchParams(params);
     navigate('?' + searchParams.toString());
     addHistory(params.q);
+    setfilterOpen(false);
 
-    if (filterOpenRef.current) {
+    if (filterOpen) {
       form.setValue('search', DEFULAT_VALUE.SEARCH);
     } else {
       form.setValue('filter', {
@@ -68,15 +71,12 @@ export default function SearchForm({ defaultValue }: Props) {
   const { searchHistory, addHistory, removeHistory } =
     useSearchHistory(HISTORY_COUNT_LIMIT);
 
-  const handlePopoverOpenChange = (open: boolean) =>
-    (filterOpenRef.current = open);
-
   return (
     <Form
-      id="search-form"
+      id={FORM_ID}
       className="w-full flex items-center gap-4"
       {...form}
-      onSubmit={form.handleSubmit(onSubmit, console.log)}
+      onSubmit={form.handleSubmit(onSubmit)}
     >
       <FormField
         control={form.control}
@@ -92,9 +92,10 @@ export default function SearchForm({ defaultValue }: Props) {
         )}
       />
       <SearchDetailPopover
-        form="search-form"
+        form={FORM_ID}
         triggerText="상세검색"
         submitText="검색하기"
+        open={filterOpen}
         onOpenChange={handlePopoverOpenChange}
       >
         <fieldset className="w-full flex items-center gap-1">
@@ -104,6 +105,7 @@ export default function SearchForm({ defaultValue }: Props) {
             render={({ field }) => (
               <Select
                 {...field}
+                form={FORM_ID}
                 className="basis-[100px] shrink-0"
                 variant="underline"
                 onValueChange={field.onChange}
@@ -120,6 +122,7 @@ export default function SearchForm({ defaultValue }: Props) {
             render={({ field }) => (
               <Input
                 {...field}
+                form={FORM_ID}
                 className="w-full text-[14px] leading-[22px] pt-2"
                 placeholder="검색어 입력"
                 variant="underline"
