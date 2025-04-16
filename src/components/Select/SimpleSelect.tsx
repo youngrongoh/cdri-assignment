@@ -9,12 +9,14 @@ import {
 
 type SelectItem = { label: string; value: string };
 interface Props<T extends SelectItem> extends ComponentProps<typeof Select> {
+  className?: string;
   placeholder?: string;
   items?: T[];
   render?: (items: T[]) => ReactNode;
 }
 
 export default function SimpleSelect<T extends SelectItem>({
+  className,
   items = [],
   placeholder,
   render,
@@ -24,7 +26,7 @@ export default function SimpleSelect<T extends SelectItem>({
   const renderItems = render ?? renderDefault;
   return (
     <Select {...props}>
-      <SelectTrigger>
+      <SelectTrigger className={className}>
         {children || <SelectValue placeholder={placeholder} />}
       </SelectTrigger>
       <SelectContent>{renderItems(items)}</SelectContent>

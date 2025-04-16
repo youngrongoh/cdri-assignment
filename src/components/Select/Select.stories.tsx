@@ -34,6 +34,14 @@ export const Default: Story = {
   },
 };
 
+export const Underline: Story = {
+  args: {
+    variant: 'underline',
+    placeholder: 'placeholder',
+    items: ITEMS,
+  },
+};
+
 export const Slot: Story = {
   args: {
     slot: true,
