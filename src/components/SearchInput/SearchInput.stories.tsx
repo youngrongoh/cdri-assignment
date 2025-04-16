@@ -15,9 +15,6 @@ export const Default: Story = {
   args: {
     variant: 'default',
     placeholder: 'placeholder',
-    searchHistory: [
-      { keyword: 'a', createdTime: new Date() },
-      { keyword: 'b', createdTime: new Date() },
-    ],
+    searchHistory: ['keyword 1', 'keyword 2'],
   },
 };
