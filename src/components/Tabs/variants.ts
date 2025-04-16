@@ -1,4 +1,4 @@
-import createVariantContext from '@/lib/styles/variant-context';
+import createVariantContext from '@/lib/contexts/variant-context';
 import { tv, VariantProps } from 'tailwind-variants';
 
 export const tabs = tv({
