@@ -13,7 +13,8 @@ export const searchFormSchema = z
   })
   .refine((data) => {
     const isSearchValid = searchSchema.safeParse(data.search).success;
-    const isFilterValid = filterSchema.safeParse(data.search).success;
+    const isFilterValid = filterSchema.safeParse(data.filter).success;
+
     return isSearchValid || isFilterValid;
   });
 
