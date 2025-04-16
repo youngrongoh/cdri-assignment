@@ -18,6 +18,7 @@ import { ComponentProps, createContext, useContext, useId } from 'react';
 interface HtmlFormProps {
   className?: ComponentProps<'form'>['className'];
   onSubmit?: ComponentProps<'form'>['onSubmit'];
+  id?: string;
 }
 
 const Form = <
@@ -29,12 +30,13 @@ const Form = <
   className,
   onSubmit,
   children,
+  id,
   ...props
 }: HtmlFormProps &
   FormProviderProps<TFieldValues, TContext, TTransformedValues>) => {
   return (
     <FormProvider {...props}>
-      <form className={className} onSubmit={onSubmit}>
+      <form id={id} className={className} onSubmit={onSubmit}>
         {children}
       </form>
     </FormProvider>
